@@ -1,0 +1,21 @@
+atstincer@DESKTOP-9PNNGM7:~$ docker container ls
+CONTAINER ID   IMAGE     COMMAND                  CREATED        STATUS          PORTS                                           NAMES
+1e774b13a749   redis     "docker-entrypoint.s…"   25 hours ago   Up 11 minutes   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp     todo-backend-redis-1
+1704e5f9eebf   mongo     "docker-entrypoint.s…"   11 days ago    Up 11 minutes   0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp   todo-backend-mongo-1
+atstincer@DESKTOP-9PNNGM7:~$ docker exec -it todo-backend-redis-1 redis-cli
+127.0.0.1:6379> KEYS *
+1) "todoCount"
+127.0.0.1:6379> GET todoCount
+"3"
+127.0.0.1:6379> SET todoCount "9001"
+OK
+127.0.0.1:6379> GET todoCount
+"9002"
+127.0.0.1:6379> DEL todoCount
+(integer) 1
+127.0.0.1:6379> GET todoCount
+(nil)
+127.0.0.1:6379> GET todoCount
+"1"
+127.0.0.1:6379>
+atstincer@DESKTOP-9PNNGM7:~$
