@@ -2,3 +2,5 @@ mongo_data
 redis_data
 node_modules
 .git
+.gitignore
+.dockerignore
