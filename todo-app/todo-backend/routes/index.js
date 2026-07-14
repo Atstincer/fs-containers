@@ -1,8 +1,7 @@
-const express = require('express');
-const redis = require('../redis');
+const express = require('express')
+const redis = require('../redis')
 
-
-const router = express.Router();
+const router = express.Router()
 
 const configs = require('../util/config')
 
@@ -14,16 +13,20 @@ router.get('/', async (req, res) => {
 
   res.send({
     ...configs,
-    visits
-  });
-});
+    visits,
+  })
+})
 
 /* GET statistics */
 router.get('/statistics', async (req, res) => {
-  console.log('statistics endpoit erreicht')
-  const added_todos = await redis.get('todoCount')
-  console.log('added_todos',added_todos)
-  res.send({"added_todos": added_todos === null || added_todos.length === 0 ? '0' : added_todos});
-});
+  //console.log('statistics endpoit erreicht')
+  const added_todos_str = await redis.get('todoCount')
+  //console.log('added_todos', added_todos)
+  //console.log('typeof added_todos', typeof added_todos)
+  const added_todos = Number(added_todos_str)
+  res.send({
+    added_todos: Number.isNaN(added_todos) ? 0 : added_todos,
+  })
+})
 
-module.exports = router;
+module.exports = router
